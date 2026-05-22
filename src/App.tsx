@@ -1,0 +1,101 @@
+import { Switch, Route, Router as WouterRouter, Redirect } from "wouter";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import NotFound from "@/pages/not-found";
+import Home from "@/pages/home";
+import LoginPage from "@/pages/login";
+import SignupPage from "@/pages/signup";
+import ForgotPasswordPage from "@/pages/forgot-password";
+import ResetPasswordPage from "@/pages/reset-password";
+import DestinationsPage from "@/pages/destinations";
+import DestinationDetailPage from "@/pages/destination-detail";
+import PackagesPage from "@/pages/packages";
+import PackageDetailPage from "@/pages/package-detail";
+import GalleryPage from "@/pages/gallery";
+import BlogPage from "@/pages/blog";
+import BlogDetailPage from "@/pages/blog-detail";
+import DashboardPage from "@/pages/dashboard/index";
+import UpcomingTripsPage from "@/pages/dashboard/upcoming-trips";
+import PastTripsPage from "@/pages/dashboard/past-trips";
+import FavoriteTripsPage from "@/pages/dashboard/favorite-trips";
+import TxHistoryPage from "@/pages/dashboard/tx-history";
+import DashboardResetPasswordPage from "@/pages/dashboard/reset-password";
+import ProfilePage from "@/pages/dashboard/profile";
+import OrdersPage from "@/pages/dashboard/orders";
+import CancelHistoryPage from "@/pages/dashboard/cancel-history";
+import CheckoutPage from "@/pages/checkout";
+import OffersPage from "@/pages/offers";
+
+const queryClient = new QueryClient();
+
+function ProtectedRoute({ component: Component }: { component: () => React.ReactElement | null }) {
+  const { user, loading } = useAuth();
+  if (loading) return null;
+  if (!user) return <Redirect to="/login" />;
+  return <Component />;
+}
+
+function AppShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
+  );
+}
+
+function Router() {
+  return (
+    <Switch>
+      <Route path="/" component={() => <AppShell><Home /></AppShell>} />
+      <Route path="/destinations" component={() => <AppShell><DestinationsPage /></AppShell>} />
+      <Route path="/destinations/:id" component={() => <AppShell><DestinationDetailPage /></AppShell>} />
+      <Route path="/packages" component={() => <AppShell><PackagesPage /></AppShell>} />
+      <Route path="/packages/:id" component={() => <AppShell><PackageDetailPage /></AppShell>} />
+      <Route path="/gallery" component={() => <AppShell><GalleryPage /></AppShell>} />
+      <Route path="/blog" component={() => <AppShell><BlogPage /></AppShell>} />
+      <Route path="/blog/:id" component={() => <AppShell><BlogDetailPage /></AppShell>} />
+      <Route path="/offers" component={() => <AppShell><OffersPage /></AppShell>} />
+      <Route path="/checkout" component={() => <AppShell><CheckoutPage /></AppShell>} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/signup" component={SignupPage} />
+      <Route path="/forgot-password" component={ForgotPasswordPage} />
+      <Route path="/reset-password" component={ResetPasswordPage} />
+      <Route path="/dashboard" component={() => <ProtectedRoute component={DashboardPage} />} />
+      <Route path="/dashboard/profile" component={() => <ProtectedRoute component={ProfilePage} />} />
+      <Route path="/dashboard/orders" component={() => <ProtectedRoute component={OrdersPage} />} />
+      <Route path="/dashboard/upcoming-trips" component={() => <ProtectedRoute component={UpcomingTripsPage} />} />
+      <Route path="/dashboard/past-trips" component={() => <ProtectedRoute component={PastTripsPage} />} />
+      <Route path="/dashboard/favorite-trips" component={() => <ProtectedRoute component={FavoriteTripsPage} />} />
+      <Route path="/dashboard/tx-history" component={() => <ProtectedRoute component={TxHistoryPage} />} />
+      <Route path="/dashboard/reset-password" component={() => <ProtectedRoute component={DashboardResetPasswordPage} />} />
+      <Route path="/dashboard/cancel-history" component={() => <ProtectedRoute component={CancelHistoryPage} />} />
+      <Route component={NotFound} />
+    </Switch>
+  );
+}
+
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <CartProvider>
+          <TooltipProvider>
+            <WouterRouter base={(import.meta.env.BASE_URL ?? "/").replace(/\/$/, "")}>
+              <Router />
+            </WouterRouter>
+            <Toaster />
+          </TooltipProvider>
+        </CartProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+}
+
+export default App;

@@ -1,0 +1,35 @@
+# --- OS-specific files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- Dependency directories ---
+# Keep these out of Git! They should be installed via package managers.
+node_modules/
+jspm_packages/
+bower_components/
+venv/
+.venv/
+env/
+
+# --- Build output and temporary files ---
+dist/
+build/
+out/
+*.log
+*.tmp
+*.bak
+
+# --- Environment variables and secrets ---
+# NEVER commit your credentials!
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- IDE and Editor settings ---
+.vscode/
+.idea/
+*.swp
+*.swo
