@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLocation } from 'wouter';
 import { useAuth } from '@/contexts/AuthContext';
 import { submitBookingInquiry } from '@/lib/supabase-db';
 import { Button } from '@/components/ui/button';
@@ -19,6 +20,7 @@ const INTERESTS = ['Beach', 'Mountains', 'Culture', 'Adventure', 'Wildlife', 'Fo
 
 export function BookingForm({ open, onClose }: BookingFormProps) {
   const { user } = useAuth();
+  const [, navigate] = useLocation();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -58,9 +60,17 @@ export function BookingForm({ open, onClose }: BookingFormProps) {
         return_date: form.return_date || null,
       });
       setSubmitted(true);
+      setTimeout(() => {
+        handleClose();
+        navigate('/checkout');
+      }, 2000);
     } catch {
       // silently handle — show success anyway
       setSubmitted(true);
+      setTimeout(() => {
+        handleClose();
+        navigate('/checkout');
+      }, 2000);
     } finally {
       setLoading(false);
     }

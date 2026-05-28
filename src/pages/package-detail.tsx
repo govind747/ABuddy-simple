@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchPackage } from '@/lib/supabase-queries';
 import { useCart } from '@/contexts/CartContext';
 import { ReviewSection } from '@/components/reviews/ReviewSection';
+import { BookingForm } from '@/components/home/BookingForm';
 import { useState } from 'react';
 
 export default function PackageDetailPage() {
@@ -13,6 +14,7 @@ export default function PackageDetailPage() {
   const id = parseInt(params.id ?? '0', 10);
   const { addItem, isInCart } = useCart();
   const [addedFeedback, setAddedFeedback] = useState(false);
+  const [bookingFormOpen, setBookingFormOpen] = useState(false);
 
   const { data: pkg, isLoading } = useQuery({ queryKey: ['package', id], queryFn: () => fetchPackage(id), enabled: !!id });
 
@@ -135,11 +137,9 @@ export default function PackageDetailPage() {
               <p className="text-xs text-muted-foreground mb-6">per person</p>
 
               <div className="space-y-3 mb-4">
-                <Link href="/checkout">
-                  <Button className="w-full rounded-full h-12 font-semibold gap-2" data-testid="button-book-now">
-                    <Zap className="h-4 w-4" /> Book Now
-                  </Button>
-                </Link>
+                <Button onClick={() => setBookingFormOpen(true)} className="w-full rounded-full h-12 font-semibold gap-2" data-testid="button-book-now">
+                  <Zap className="h-4 w-4" /> Book Now
+                </Button>
                 <Button
                   variant={inCart ? 'secondary' : 'outline'}
                   className="w-full rounded-full h-12 font-semibold gap-2"
@@ -176,6 +176,7 @@ export default function PackageDetailPage() {
           </div>
         </div>
       </div>
+      <BookingForm open={bookingFormOpen} onClose={() => setBookingFormOpen(false)} />
     </div>
   );
 }

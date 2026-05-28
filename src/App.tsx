@@ -67,15 +67,15 @@ function Router() {
       <Route path="/signup" component={SignupPage} />
       <Route path="/forgot-password" component={ForgotPasswordPage} />
       <Route path="/reset-password" component={ResetPasswordPage} />
-      <Route path="/dashboard" component={() => <ProtectedRoute component={DashboardPage} />} />
-      <Route path="/dashboard/profile" component={() => <ProtectedRoute component={ProfilePage} />} />
-      <Route path="/dashboard/orders" component={() => <ProtectedRoute component={OrdersPage} />} />
-      <Route path="/dashboard/upcoming-trips" component={() => <ProtectedRoute component={UpcomingTripsPage} />} />
-      <Route path="/dashboard/past-trips" component={() => <ProtectedRoute component={PastTripsPage} />} />
-      <Route path="/dashboard/favorite-trips" component={() => <ProtectedRoute component={FavoriteTripsPage} />} />
-      <Route path="/dashboard/tx-history" component={() => <ProtectedRoute component={TxHistoryPage} />} />
-      <Route path="/dashboard/reset-password" component={() => <ProtectedRoute component={DashboardResetPasswordPage} />} />
-      <Route path="/dashboard/cancel-history" component={() => <ProtectedRoute component={CancelHistoryPage} />} />
+      <Route path="/dashboard" component={() => <AppShell><ProtectedRoute component={DashboardPage} /></AppShell>} />
+      <Route path="/dashboard/profile" component={() => <AppShell><ProtectedRoute component={ProfilePage} /></AppShell>} />
+      <Route path="/dashboard/orders" component={() => <AppShell><ProtectedRoute component={OrdersPage} /></AppShell>} />
+      <Route path="/dashboard/upcoming-trips" component={() => <AppShell><ProtectedRoute component={UpcomingTripsPage} /></AppShell>} />
+      <Route path="/dashboard/past-trips" component={() => <AppShell><ProtectedRoute component={PastTripsPage} /></AppShell>} />
+      <Route path="/dashboard/favorite-trips" component={() => <AppShell><ProtectedRoute component={FavoriteTripsPage} /></AppShell>} />
+      <Route path="/dashboard/tx-history" component={() => <AppShell><ProtectedRoute component={TxHistoryPage} /></AppShell>} />
+      <Route path="/dashboard/reset-password" component={() => <AppShell><ProtectedRoute component={DashboardResetPasswordPage} /></AppShell>} />
+      <Route path="/dashboard/cancel-history" component={() => <AppShell><ProtectedRoute component={CancelHistoryPage} /></AppShell>} />
       <Route component={NotFound} />
     </Switch>
   );
