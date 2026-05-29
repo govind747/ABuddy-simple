@@ -24,6 +24,28 @@ const AuthContext = createContext<AuthContextType>({
   updatePassword: async () => ({ error: null }),
 });
 
+async function ensureUserProfile(user: User) {
+  const { data: existing } = await supabase
+    .from('user_profiles')
+    .select('id')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (!existing) {
+    await supabase.from('user_profiles').insert({
+      id: user.id,
+      full_name: user.user_metadata?.full_name ?? null,
+      email: user.email,
+    });
+  } else {
+    await supabase.from('user_profiles').update({
+      full_name: user.user_metadata?.full_name ?? null,
+      email: user.email,
+      updated_at: new Date().toISOString(),
+    }).eq('id', user.id);
+  }
+}
+
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -34,12 +56,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+      if (session?.user) {
+        ensureUserProfile(session.user);
+      }
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
+      if (session?.user) {
+        ensureUserProfile(session.user);
+      }
     });
 
     return () => subscription.unsubscribe();
@@ -51,11 +79,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const signUp = async (email: string, password: string, name?: string) => {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { full_name: name } },
     });
+    if (data.user && !error) {
+      await ensureUserProfile(data.user);
+    }
     return { error: error?.message ?? null };
   };
 
