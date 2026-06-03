@@ -12,13 +12,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  Compass, Menu, X, LayoutDashboard, ShoppingBag, Calendar, XCircle,
-  KeyRound, LogOut, User, ShoppingCart, Tag, ChevronDown,
-} from 'lucide-react';
+import { Compass, Menu, X, LayoutDashboard, ShoppingBag, Calendar, Circle as XCircle, KeyRound, LogOut, User, ShoppingCart, Tag, ChevronDown } from 'lucide-react';
 
 const navLinks = [
   { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
   { href: '/destinations', label: 'Destinations' },
   { href: '/packages', label: 'Packages' },
   { href: '/gallery', label: 'Gallery' },

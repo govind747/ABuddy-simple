@@ -30,6 +30,7 @@ import OrdersPage from "@/pages/dashboard/orders";
 import CancelHistoryPage from "@/pages/dashboard/cancel-history";
 import CheckoutPage from "@/pages/checkout";
 import OffersPage from "@/pages/offers";
+import ServicesPage from "@/pages/services";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ function Router() {
       <Route path="/gallery" component={() => <AppShell><GalleryPage /></AppShell>} />
       <Route path="/blog" component={() => <AppShell><BlogPage /></AppShell>} />
       <Route path="/blog/:id" component={() => <AppShell><BlogDetailPage /></AppShell>} />
+      <Route path="/services" component={() => <AppShell><ServicesPage /></AppShell>} />
       <Route path="/offers" component={() => <AppShell><OffersPage /></AppShell>} />
       <Route path="/checkout" component={() => <AppShell><CheckoutPage /></AppShell>} />
       <Route path="/login" component={LoginPage} />
