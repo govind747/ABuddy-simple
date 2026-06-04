@@ -6,6 +6,7 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { CartProvider } from "@/contexts/CartContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import CookieConsentModal from "@/components/layout/CookieConsentModal";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import LoginPage from "@/pages/login";
@@ -19,6 +20,12 @@ import PackageDetailPage from "@/pages/package-detail";
 import GalleryPage from "@/pages/gallery";
 import BlogPage from "@/pages/blog";
 import BlogDetailPage from "@/pages/blog-detail";
+import ServicesPage from "@/pages/services";
+import FAQPage from "@/pages/faq";
+import ContactUsPage from "@/pages/contact-us";
+import PrivacyPolicyPage from "@/pages/privacy-policy";
+import TermsOfServicePage from "@/pages/terms-of-service";
+import CookiePolicyPage from "@/pages/cookie-policy";
 import DashboardPage from "@/pages/dashboard/index";
 import UpcomingTripsPage from "@/pages/dashboard/upcoming-trips";
 import PastTripsPage from "@/pages/dashboard/past-trips";
@@ -30,7 +37,6 @@ import OrdersPage from "@/pages/dashboard/orders";
 import CancelHistoryPage from "@/pages/dashboard/cancel-history";
 import CheckoutPage from "@/pages/checkout";
 import OffersPage from "@/pages/offers";
-import ServicesPage from "@/pages/services";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +69,11 @@ function Router() {
       <Route path="/blog" component={() => <AppShell><BlogPage /></AppShell>} />
       <Route path="/blog/:id" component={() => <AppShell><BlogDetailPage /></AppShell>} />
       <Route path="/services" component={() => <AppShell><ServicesPage /></AppShell>} />
+      <Route path="/faq" component={() => <AppShell><FAQPage /></AppShell>} />
+      <Route path="/contact-us" component={() => <AppShell><ContactUsPage /></AppShell>} />
+      <Route path="/privacy-policy" component={() => <AppShell><PrivacyPolicyPage /></AppShell>} />
+      <Route path="/terms-of-service" component={() => <AppShell><TermsOfServicePage /></AppShell>} />
+      <Route path="/cookie-policy" component={() => <AppShell><CookiePolicyPage /></AppShell>} />
       <Route path="/offers" component={() => <AppShell><OffersPage /></AppShell>} />
       <Route path="/checkout" component={() => <AppShell><CheckoutPage /></AppShell>} />
       <Route path="/login" component={LoginPage} />
@@ -93,6 +104,7 @@ function App() {
               <Router />
             </WouterRouter>
             <Toaster />
+            <CookieConsentModal />
           </TooltipProvider>
         </CartProvider>
       </AuthProvider>

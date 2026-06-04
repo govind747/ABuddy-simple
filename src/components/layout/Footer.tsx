@@ -45,9 +45,17 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-5">Support</h4>
             <ul className="space-y-3 text-sm">
-              {['FAQ', 'Contact Us', 'Privacy Policy', 'Terms of Service', 'Cookie Policy'].map(item => (
-                <li key={item}>
-                  <a href="#" className="text-slate-400 hover:text-primary transition-colors">{item}</a>
+              {[
+                { href: '/faq', label: 'FAQ' },
+                { href: '/contact-us', label: 'Contact Us' },
+                { href: '/privacy-policy', label: 'Privacy Policy' },
+                { href: '/terms-of-service', label: 'Terms of Service' },
+                { href: '/cookie-policy', label: 'Cookie Policy' },
+              ].map(link => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-slate-400 hover:text-primary transition-colors">
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -56,9 +64,9 @@ export function Footer() {
           <div>
             <h4 className="font-bold text-white mb-5">Contact</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li className="flex items-center gap-2.5"><MapPin className="h-4 w-4 text-primary shrink-0" />123 Adventure Lane, Travel City</li>
-              <li className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-primary shrink-0" />hello@travelco.com</li>
-              <li className="flex items-center gap-2.5"><Phone className="h-4 w-4 text-primary shrink-0" />+1 (555) 123-4567</li>
+              <li className="flex items-center gap-2.5"><MapPin className="h-4 w-4 text-primary shrink-0" />Hyderabad, Telangana, India</li>
+              <li className="flex items-center gap-2.5"><Mail className="h-4 w-4 text-primary shrink-0" />info@traveltour.com</li>
+              <li className="flex items-center gap-2.5"><Phone className="h-4 w-4 text-primary shrink-0" />+91-40-1234-5678</li>
             </ul>
 
             <h4 className="font-bold text-white mt-7 mb-4">Newsletter</h4>
