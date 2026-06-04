@@ -1,14 +1,3 @@
-The gap you are seeing when you open the page is caused by combining **two spacing properties** at the exact same time:
-
-1. The outer wrapper `div` has `pt-20` (padding-top: 5rem), which pushes the page down to make room for your fixed Header component.
-2. The Hero `<section>` has `mb-16` (margin-bottom) but it sits right below that padded zone, while some browsers or CSS layouts cause layout shifts when loading large background images over static containers.
-3. Most importantly, your hero section is **not taking full advantage of a clean structural overflow layout**, which can cause a visual whitespace buffer depending on how your global layout manages margins.
-
-Here is the fully cleaned up, optimized file. The code below fixes the header gap cleanly while giving the page a premium, high-impact aesthetic upgrade matching your dark/organic ecosystem theme, complete with micro-interactions, distinct icons for each activity tier, and a perfectly aligned structural Hero section.
-
-### Fixed & Upgraded `SchoolStudyPage.tsx`
-
-```tsx
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -398,5 +387,3 @@ export default function SchoolStudyPage() {
     </div>
   );
 }
-
-```
