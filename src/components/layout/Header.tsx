@@ -17,7 +17,16 @@ import { Compass, Menu, X, LayoutDashboard, ShoppingBag, Calendar, Circle as XCi
 
 const navLinks = [
   { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
+  {
+    label: 'Services',
+    submenu: [
+      { href: '/services/solo-travel', label: 'Solo Travel' },
+      { href: '/services/family-group', label: 'Family Group' },
+      { href: '/services/school-group', label: 'School Tours' },
+      { href: '/services/college-group', label: 'College Adventures' },
+      { href: '/services/corporate', label: 'Corporate Retreats' },
+    ]
+  },
   { href: '/destinations', label: 'Destinations' },
   { href: '/packages', label: 'Packages' },
   { href: '/gallery', label: 'Gallery' },
@@ -59,12 +68,38 @@ export function Header() {
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${location === link.href ? 'text-primary bg-primary/10' : 'text-foreground/70 hover:text-foreground hover:bg-secondary'}`}>
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isSubmenu = 'submenu' in link;
+
+              if (isSubmenu) {
+                return (
+                  <DropdownMenu key={link.label}>
+                    <DropdownMenuTrigger asChild>
+                      <button className={`px-4 py-2 text-sm font-medium rounded-full transition-colors flex items-center gap-1 text-foreground/70 hover:text-foreground hover:bg-secondary`}>
+                        {link.label}
+                        <ChevronDown className="h-4 w-4" />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start">
+                      {link.submenu?.map((item) => (
+                        <Link key={item.href} href={item.href}>
+                          <DropdownMenuItem className="cursor-pointer">
+                            {item.label}
+                          </DropdownMenuItem>
+                        </Link>
+                      ))}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                );
+              }
+
+              return (
+                <Link key={link.href} href={link.href}
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${location === link.href ? 'text-primary bg-primary/10' : 'text-foreground/70 hover:text-foreground hover:bg-secondary'}`}>
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-2">
