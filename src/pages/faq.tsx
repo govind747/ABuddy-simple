@@ -1,10 +1,3 @@
-Here is your completely transformed, production-ready `FAQPage` component.
-
-The design features a luxury travel aesthetic tailored for an Indian and Uttarakhand tourism agency. It organizes content using category tabs with smooth animations, features interactive grid headers, upgrades the generic style to a premium glassmorphic/card-based layout, and applies dynamic micro-interactions throughout.
-
-### Enhanced Premium `FAQPage.tsx`
-
-```tsx
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -299,5 +292,3 @@ export default function FAQPage() {
     </div>
   );
 }
-
-```
