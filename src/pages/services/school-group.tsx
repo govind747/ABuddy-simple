@@ -134,18 +134,16 @@ export default function SchoolStudyPage() {
   ];
 
   return (
-    // FIXED: Removed pt-20 from here to prevent the top whitespace layout split
-    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-      
-      {/* Hero Section - FIXED: Added pt-20 here so the content clears the navigation bar smoothly without breaking layout flow */}
-      <section className="relative h-96 overflow-hidden pt-20">
+    <div className="min-h-screen bg-gradient-to-b from-green-50 to-white pt-20">
+      {/* Hero Section */}
+      <section className="relative h-96 overflow-hidden mb-16">
         <img
           src="https://images.unsplash.com/photo-1427504494785-cdl7e9fadeb3?w=1600&q=80"
           alt="School Study Tour"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pt-20">
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <h1 className="text-5xl md:text-6xl font-black text-white mb-4 tracking-tight">Educational Tours</h1>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
@@ -156,13 +154,13 @@ export default function SchoolStudyPage() {
       </section>
 
       {/* About School Tours */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 my-20">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-4">About Educational Tours</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
