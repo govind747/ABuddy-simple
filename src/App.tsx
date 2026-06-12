@@ -41,6 +41,9 @@ import OrdersPage from "@/pages/dashboard/orders";
 import CancelHistoryPage from "@/pages/dashboard/cancel-history";
 import CheckoutPage from "@/pages/checkout";
 import OffersPage from "@/pages/offers";
+import TaxiBookingPage from "@/pages/taxi-booking";
+import HotelBookingPage from "@/pages/hotel-booking";
+import HolidayHomesPage from "@/pages/holiday-homes";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +85,11 @@ function Router() {
       <Route path="/services/school-group" component={() => <AppShell><SchoolGroupPage /></AppShell>} />
       <Route path="/services/college-group" component={() => <AppShell><CollegeGroupPage /></AppShell>} />
       <Route path="/services/corporate" component={() => <AppShell><CorporatePage /></AppShell>} />
+      <Route path="/taxi-booking" component={() => <AppShell><TaxiBookingPage /></AppShell>} />
+      <Route path="/hotel-booking" component={() => <AppShell><HotelBookingPage /></AppShell>} />
+      <Route path="/holiday-homes" component={() => <AppShell><HolidayHomesPage /></AppShell>} />
+      <Route path="/train-booking" component={NotFound} />
+      <Route path="/flight-booking" component={NotFound} />
       <Route path="/offers" component={() => <AppShell><OffersPage /></AppShell>} />
       <Route path="/checkout" component={() => <AppShell><CheckoutPage /></AppShell>} />
       <Route path="/login" component={LoginPage} />
